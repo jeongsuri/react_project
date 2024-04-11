@@ -135,6 +135,36 @@ export default App;
 
 # 레이아웃 구성
 
-- src/layouts/MainLayout.js
-- src/outlines/Header.js
-- src/outlines/Footer.js
+- `src/layouts/MainLayout.js`
+- `src/outlines/Header.js`
+- `src/outlines/Footer.js`
+
+## 설정
+ - `src/index.js` : `BrowserRouter` 컴포넌트 감싸기
+ ```jsx
+ ...
+ import { BrowserRouter } from 'react-router-dom';
+ ...
+ ```
+
+
+# 라우팅 구성
+
+## 메인 페이지
+
+## 회원
+- `/member/pages/Join` 회원가입
+- `/member/pages/Login` 로그인
+
+## 없는 페이지
+ - `*` : 없는 페이지 - `commons/pages/NotFound.js`
+
+## 에러페이지
+> class형 컴포넌트 - `componentDidCatch`
+
+- `commons/pages/Error.js'
+- `commons/components/ErrorDisplay.js
+
+
+
+
