@@ -13,7 +13,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
-        <Route index elemet={<Main />} /> {/*메인페이지*/}
+        <Route index element={<Main />} /> {/*메인페이지*/}
         {/* 회원페이지 Start */}
         <Route path="member">
           <Route path="join" element={<Join />} />
