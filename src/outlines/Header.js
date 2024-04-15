@@ -8,6 +8,8 @@ import { color } from '../styles/color';
 import logo from '../images/logo.png';
 import { FaSearch } from 'react-icons/fa';
 
+import MainMenu from './MainMenu';
+
 const { primary, dark, light } = color;
 const HeaderBox = styled.header`
   .site-top {
@@ -23,7 +25,7 @@ const HeaderBox = styled.header`
         display: inline-blick; //높이 중앙정렬
         line-height: 34px; //높이 중앙정렬 (heigh(35) - border-bottom(1))
         margin-left: 10px;
-        font-size: ${fontSize.normal};
+        font-size: ${fontSize.medium};
 
         &.on {
           color: ${primary};
@@ -33,22 +35,33 @@ const HeaderBox = styled.header`
   }
 
   .logo-search {
-    div{
+    div {
       display: flex;
       justify-content: space-between;
       height: 150px;
       align-items: center;
 
-      form{
+      form {
         display: flex;
-        height: 55px;
+        height: 45px;
         width: 380px;
 
-        button{
+        button {
           width: 45px;
+          background: ${dark};
+          border: 0 ${dark};
+
+          svg {
+            color: ${light};
+            font-size: 1.3rem;
+            cursor: point;
+          }
         }
-        iput[type:'text']{
+
+        input[type='text'] {
           flex-grow: 1;
+          border: 3px solid ${dark};
+          padding: 0 10px;
         }
       }
     }
@@ -90,6 +103,7 @@ const Header = () => {
           </form>
         </div>
       </section>
+      <MainMenu />
     </HeaderBox>
   );
 };
