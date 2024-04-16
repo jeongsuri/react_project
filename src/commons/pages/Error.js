@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import loadable from '@loadable/component';
 
-const ErrorDispaly = loadable(() => import('../componetns/ErrorDispay'));
+const ErrorDisplay = loadable(() => import('../components/ErrorDisplay'));
 
-class Errorpage extends Component {
+class ErrorPage extends Component {
   state = {
     message: '',
   };
+
   componentDidCatch(error, info) {
     if (error) {
       this.setState({ message: error.message });
@@ -17,8 +18,9 @@ class Errorpage extends Component {
   render() {
     const { children } = this.props;
     const { message } = this.state;
-    return message ? <ErrorDispaly>{message}</ErrorDispaly> : children;
+
+    return message ? <ErrorDisplay>{message}</ErrorDisplay> : children;
   }
 }
 
-export default React.memo(Errorpage);
+export default React.memo(ErrorPage);
