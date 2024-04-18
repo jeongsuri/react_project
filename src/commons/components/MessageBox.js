@@ -5,23 +5,29 @@ import fontSize from '../../styles/fontSize';
 const { small } = fontSize;
 
 const Box = styled.div`
-    text-align = center;
-    padding: 7px 10px;
-    font-size : ${small};
-    border-readius: 3px;
-    color: ${color.dark};
-    ${({ color: c }) =>
-      c &&
-      css`
-        color: ${color[c]};
-        box-shadow: 2px 5px 5px ${color[c]};
-      `}
+  text-align: center;
+  padding: 7px 10px;
+  font-size: ${small};
+  border-radius: 3px;
+  color: ${color.dark};
+
+  & + & {
+    margin-top: 5px;
+  }
+
+  ${({ color: c }) =>
+    c &&
+    css`
+      color: ${color[c]};
+      box-shadow: 2px 2px 5px ${color[c]};
+    `}
 `;
 
 const MessageBox = ({ messages, color, children }) => {
   messages = messages || [];
 
   if (children) messages.push(children);
+
   return (
     <>
       {messages.map((message, i) => (

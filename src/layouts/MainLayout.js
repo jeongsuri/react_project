@@ -5,7 +5,8 @@ import Header from '../outlines/Header';
 import Footer from '../outlines/Footer';
 
 const MainBox = styled.main`
-  min-height: 700px;
+  min-height: 650px;
+  position: relative;
 `;
 
 const MainLayout = () => {
@@ -19,4 +20,5 @@ const MainLayout = () => {
     </>
   );
 };
+
 export default React.memo(MainLayout);
