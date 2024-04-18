@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Link, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
+
+import { FaSearch } from 'react-icons/fa';
+
 import fontSize from '../styles/fontSize';
 import { color } from '../styles/color';
 import logo from '../images/logo.png';
-import { FaSearch } from 'react-icons/fa';
-
 import MainMenu from './MainMenu';
+import UserInfoContext from '../member/modules/UserInfoContext';
 
 const { primary, dark, light } = color;
+
 const HeaderBox = styled.header`
   .site-top {
     background: #f8f8f8;
@@ -21,11 +24,10 @@ const HeaderBox = styled.header`
       text-align: right;
 
       a {
-        //link태그
-        display: inline-blick; //높이 중앙정렬
-        line-height: 34px; //높이 중앙정렬 (heigh(35) - border-bottom(1))
+        display: inline-block;
+        line-height: 34px;
         margin-left: 10px;
-        font-size: ${fontSize.medium};
+        font-size: ${fontSize.normal};
 
         &.on {
           color: ${primary};
@@ -49,18 +51,18 @@ const HeaderBox = styled.header`
         button {
           width: 45px;
           background: ${dark};
-          border: 0 ${dark};
+          border: 0;
+          cursor: pointer;
 
           svg {
             color: ${light};
-            font-size: 1.3rem;
-            cursor: point;
+            font-size: 1.75rem;
           }
         }
 
         input[type='text'] {
           flex-grow: 1;
-          border: 3px solid ${dark};
+          border: 5px solid ${dark};
           padding: 0 10px;
         }
       }
@@ -70,23 +72,52 @@ const HeaderBox = styled.header`
 
 const Header = () => {
   const { t } = useTranslation();
+  const {
+    states: { isLogin, userInfo },
+  } = useContext(UserInfoContext);
 
   return (
     <HeaderBox>
       <section className="site-top">
         <div className="layout-width">
-          <NavLink
-            to="/member/join"
-            className={({ isActive }) => classNames({ on: isActive })}
-          >
-            {t('회원가입')}
-          </NavLink>
-          <NavLink
-            to="/member/login"
-            className={({ isActive }) => classNames({ on: isActive })}
-          >
-            {t('로그인')}
-          </NavLink>
+          {isLogin ? (
+            <>
+              {' '}
+              {/* 로그인 상태 */}
+              <span>
+                {userInfo.name}({userInfo.email}){t('님 로그인')}
+              </span>
+              <NavLink
+                to="/mypage"
+                className={({ isActive }) => classNames({ on: isActive })}
+              >
+                {t('마이페이지')}
+              </NavLink>
+              <NavLink
+                to="/member/logout"
+                className={({ isActive }) => classNames({ on: isActive })}
+              >
+                {t('로그아웃')}
+              </NavLink>
+            </>
+          ) : (
+            <>
+              {' '}
+              {/* 미로그인 상태 */}
+              <NavLink
+                to="/member/join"
+                className={({ isActive }) => classNames({ on: isActive })}
+              >
+                {t('회원가입')}
+              </NavLink>
+              <NavLink
+                to="/member/login"
+                className={({ isActive }) => classNames({ on: isActive })}
+              >
+                {t('로그인')}
+              </NavLink>
+            </>
+          )}
         </div>
       </section>
       <section className="logo-search">
@@ -107,4 +138,5 @@ const Header = () => {
     </HeaderBox>
   );
 };
+
 export default React.memo(Header);
