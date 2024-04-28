@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import NewsCategory from '../components/NewsCategory';
 import NewsItems from '../components/NewsItems';
 
@@ -25,7 +25,7 @@ const categories = [
     text: '과학',
   },
   {
-    name: 'sprots',
+    name: 'sports',
     text: '스포츠',
   },
   {
@@ -36,21 +36,23 @@ const categories = [
 
 const NewsContainer = () => {
   const [items, setItems] = useState([]);
-  const [category, setcategory] = useState('all');
+  let { category } = useParams();
+  category = category ?? 'all';
 
   useEffect(() => {
+    const apiKey = process.env.REACT_APP_API_KEY;
+
     const addQs = category === 'all' ? '' : `&category=${category}`;
-    const url = `https://newsapi.org/v2/top-headlines?country=kr${addQs}&apiKey=904246bdbdd94f53b331bcfd3d3bee24`;
+    const url = `https://newsapi.org/v2/top-headlines?country=kr${addQs}&apiKey=${apiKey}`;
 
     fetch(url)
       .then((res) => res.json())
       .then((json) => setItems(json.articles));
-  }, [categories]);
+  }, [category]);
 
-  const onClick = useCallback((category) => setcategory(category), []);
   return (
     <>
-      <NewsCategory categories={categories} onClick={onclick} />
+      <NewsCategory categories={categories} />
       <NewsItems items={items} />
     </>
   );

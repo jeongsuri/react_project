@@ -12,12 +12,12 @@ const Login = loadable(() => import('./member/pages/Login'));
 /* 회원 페이지 E */
 
 /* 마이페이지 S */
-const MyPageMain = loadable(() => import('./mypage/pages/MyPageMain'));
+const MypageMain = loadable(() => import('./mypage/pages/MyPageMain'));
 /* 마이페이지 E */
 
-/* 뉴스페이지 S*/
+/* 뉴스 페이지 S */
 const News = loadable(() => import('./news/pages/News'));
-/* 뉴스페이지 E*/
+/* 뉴스 페이지 E */
 
 const App = () => {
   return (
@@ -30,16 +30,15 @@ const App = () => {
           <Route path="login" element={<Login />} />
         </Route>
         {/* 회원 페이지 E */}
-
         {/* 마이페이지 S */}
         <Route path="mypage">
-          <Route index element={<MyPageMain/>}/>
+          <Route index element={<MypageMain />} />
         </Route>
         {/* 마이페이지 E */}
-        
-        {/* 뉴스페이지 */}
-        <Route path="news" element={<News/>}/>
-
+        {/* 뉴스 페이지  */}
+        <Route path="news">
+          <Route path=":category?" element={<News />} />
+        </Route>
         <Route path="*" element={<NotFound />} /> {/* 없는 페이지 */}
       </Route>
     </Routes>
